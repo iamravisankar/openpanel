@@ -130,7 +130,7 @@ export function OverviewFiltersDrawerContent({
         {filters
           .filter((filter) => filter.value[0] !== null)
           .map((filter) => {
-            return (
+            return mode === 'events' || mode === 'profiles' ? (
               <PureFilterItem
                 className="border-t p-4 first:border-0"
                 eventName="screen_view"
