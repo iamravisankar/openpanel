@@ -48,7 +48,7 @@ export function OverviewFiltersDrawerContent({
   const [filters, setFilter] = useEventQueryFilters(nuqsOptions);
   const [event, setEvent] = useEventQueryNamesFilter(nuqsOptions);
   const [showNegativeFilter, setShowNegativeFilter] = useState(false);
-  const eventNames = useEventNames(projectId);
+  const eventNames = useEventNames({ projectId });
   const eventProperties = useEventProperties({ projectId, event: event[0] });
   const profileProperties = useProfileProperties(projectId);
   const properties = mode === 'events' ? eventProperties : profileProperties;
