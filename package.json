@@ -6,7 +6,7 @@
   "author": "Carl-Gerhard Lindesvärd",
   "packageManager": "pnpm@9.15.0",
   "scripts": {
-    "test": "ls",
+    "test": "vitest",
     "dock:up": "docker compose up -d",
     "dock:down": "docker compose down",
     "dock:ch": "docker compose exec -it op-ch clickhouse-client -d openpanel",
@@ -22,7 +22,7 @@
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "lint:workspace": "pnpm dlx sherif@latest",
-    "typecheck": "ls",
+    "typecheck": "pnpm -r typecheck",
     "update-simple-git-hooks": "npx simple-git-hooks"
   },
   "simple-git-hooks": {
