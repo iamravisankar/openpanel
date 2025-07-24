@@ -45,7 +45,7 @@ export function OverviewFiltersDrawerContent({
   enableEventsFilter,
   mode,
 }: OverviewFiltersDrawerContentProps) {
-  const [filters, setFilter, setFilters, removeFilter] = useEventQueryFilters(nuqsOptions);
+  const [filters, setFilter] = useEventQueryFilters(nuqsOptions);
   const [event, setEvent] = useEventQueryNamesFilter(nuqsOptions);
   const [showNegativeFilter, setShowNegativeFilter] = useState(false);
   const eventNames = useEventNames({ projectId });
