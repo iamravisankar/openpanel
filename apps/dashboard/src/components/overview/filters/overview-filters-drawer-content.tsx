@@ -45,7 +45,7 @@ export function OverviewFiltersDrawerContent({
   enableEventsFilter,
   mode,
 }: OverviewFiltersDrawerContentProps) {
-  const [filters, setFilter] = useEventQueryFilters(nuqsOptions);
+  const [filters, setFilter, setFilters, removeFilter] = useEventQueryFilters(nuqsOptions);
   const [event, setEvent] = useEventQueryNamesFilter(nuqsOptions);
   const [showNegativeFilter, setShowNegativeFilter] = useState(false);
   const eventNames = useEventNames({ projectId });
@@ -130,7 +130,7 @@ export function OverviewFiltersDrawerContent({
         {filters
           .filter((filter) => filter.value[0] !== null)
           .map((filter) => {
-            return mode === 'events' ? (
+            return (
               <PureFilterItem
                 className="border-t p-4 first:border-0"
                 eventName="screen_view"
@@ -145,13 +145,6 @@ export function OverviewFiltersDrawerContent({
                 onChangeOperator={(operator) => {
                   setFilter(filter.name, filter.value, operator);
                 }}
-              />
-            ) : (
-              <FilterOptionProfile
-                key={filter.name}
-                projectId={projectId}
-                setFilter={setFilter}
-                {...filter}
               />
             );
           })}
@@ -208,46 +201,6 @@ export function FilterOptionEvent({
     event: filter.name === 'path' ? 'screen_view' : 'session_start',
     property: filter.name,
   });
-
-  return (
-    <div className="flex items-center gap-2">
-      <div>{filter.name}</div>
-      <Combobox
-        className="flex-1"
-        onChange={(value) => setFilter(filter.name, value, filter.operator)}
-        placeholder={'Select a value'}
-        items={values.map((value) => ({
-          value,
-          label: value,
-        }))}
-        value={String(filter.value[0] ?? '')}
-      />
-      <Button
-        size="icon"
-        variant="ghost"
-        onClick={() =>
-          setFilter(filter.name, filter.value[0] ?? '', filter.operator)
-        }
-      >
-        <XIcon />
-      </Button>
-    </div>
-  );
-}
-
-export function FilterOptionProfile({
-  setFilter,
-  projectId,
-  ...filter
-}: IChartEventFilter & {
-  projectId: string;
-  setFilter: (
-    name: string,
-    value: IChartEventFilterValue,
-    operator: IChartEventFilterOperator,
-  ) => void;
-}) {
-  const values = useProfileValues(projectId, filter.name);
 
   return (
     <div className="flex items-center gap-2">
